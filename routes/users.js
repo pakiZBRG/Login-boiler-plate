@@ -87,7 +87,7 @@ router.post('/activation',  (req, res) => {
     jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, async (err, decoded) => {
         if(err) {
             return res.status(401).json({
-                error: 'Token has expired (1hr). Login again'
+                error: 'Token has expired (15min). Login again'
             })
         } else {
             //if valid save to database
@@ -145,5 +145,19 @@ router.post('/login', validLogin, async (req, res) => {
         })
     }
 });
+
+//Get user data via userId
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id)
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                _id: result.id,
+                username: result.username,
+                email: result.email
+            })
+        })
+        .catch(err => res.status(500).json({error: err}))
+})
 
 module.exports = router;
