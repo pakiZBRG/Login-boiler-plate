@@ -129,11 +129,13 @@ button, input{
 .google{
     background: #DB4437;
     color: #fff;
+    border: none;
 }
 
 .facebook{
     background: #3b5998;
     color: #fff;
+    border: none;
 }
 
 /* HOME, USER */

@@ -6,6 +6,13 @@ export const authenticate = (res, next) => {
     next();
 }
 
+// id => _id
+export const googleAuth = (res, next) => {
+    cookie.set('token', res.data.token, {expires: 1});
+    localStorage.setItem('user', JSON.stringify(res.data.user._id))
+    next();
+}
+
 export const isAuth = () => {
     const token = cookie.get('token');
     const loggedUser = localStorage.getItem('user');

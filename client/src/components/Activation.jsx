@@ -15,7 +15,6 @@ export default function Register({match}) {
 
     useEffect(() => {
         let token = match.params.token;
-        console.log(match)
         let {username} = jwt.decode(token);
         if(token){
             setUserData({
