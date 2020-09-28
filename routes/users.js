@@ -47,6 +47,7 @@ router.post('/register', validRegister, async (req, res) => {
                 from: process.env.EMAIL_FROM,
                 to: email,
                 subject: "Account activation link",
+                //change PUBLIC_URL -> CLIENT URL if in development
                 html: `
                     <h3>Please Click on Link to Activate:</h3>
                     <p>${process.env.PUBLIC_URL}/users/activate/${token}</p>
@@ -209,6 +210,7 @@ router.post('/forgotpassword', forgotPasswordValidator, async (req, res) => {
             from: process.env.EMAIL_FROM,
             to: req.body.email,
             subject: "Reset password link",
+            //change PUBLIC_URL -> CLIENT URL if in development
             html: `
                 <h3>Please Click on Link to Reset Password:</h3>
                 <p>${process.env.PUBLIC_URL}/resetpassword/${token}</p>
