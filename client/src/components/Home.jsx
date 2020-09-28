@@ -17,6 +17,7 @@ export default function Home({match}) {
     useEffect(() => {
         let userId = localStorage.user;
         if(localStorage.length){
+            //Get logged user
             axios.get(`/users/${userId.replace(/['"]+/g, '')}`, {signal})
                 .then(res => {
                     setUserData({
@@ -37,7 +38,7 @@ export default function Home({match}) {
             <div className='background-white'>
                 {isAuth() ?
                     <div className='background-login'>
-                        <h2>You are currently logged in, {username}</h2>
+                        <h2>You are currently logged in, <span style={{color: 'crimson'}}>{username}</span></h2>
                         <Link to={`/user/${id}`}>
                             <button><i className='fa fa-user' style={{marginRight: '0.4rem'}}></i>Profile</button>
                         </Link>

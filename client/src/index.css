@@ -55,6 +55,11 @@ button, input{
     justify-content: center;
 }
 
+.forgot-password{
+    color: #fff;
+    margin-left: auto;
+}
+
 .flex-form input{
     width: 300px;
     margin: 10px;
@@ -140,7 +145,8 @@ button, input{
 
 /* HOME, USER */
 .background-white{
-    background: #fff;
+    background: transparent;
+    color: #fff;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -165,9 +171,9 @@ button, input{
 .background-login button{
     min-width: 220px;
     border: none;
-    color: #fff;
+    color: #2c0859;
     padding: 9px 0 7px 0;
-    background: #2c0859;
+    background: #fff;
     cursor: pointer;
     font-size: 1.2rem;
     transition: 600ms;
@@ -187,4 +193,5 @@ button, input{
     }
 
     .background-flex{box-shadow: none;}
+    .background-white{box-shadow: none; width: 90%;}
 }

@@ -85,7 +85,7 @@ export default function Login({history}) {
                             placeholder='Password'
                         />
                         <input type='submit' value='Login'/>
-                        <Link to='/forgotpassword'>Forgot password?</Link>
+                        <Link to='/forgotpassword' className='forgot-password'>Forgot password?</Link>
                     </form>
                     <span className='separator'><p style={{margin: '2.5rem 0'}}>or</p></span>
                     <Link to='/register' className='login-btn' style={{fontWeight: 'bold'}}>

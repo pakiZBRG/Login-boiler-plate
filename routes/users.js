@@ -167,6 +167,25 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).json({error: err}))
 })
 
+//Get all logged users
+router.get('/', (req, res) => {
+    User.find()
+        .exec()
+        .then(users => {
+            res.status(200).json({
+                count: users.length,
+                user: users.map(user => {
+                    return {
+                        id: user.id,
+                        username: user.username,
+                        email: user.email,
+                    }
+                })
+            })
+        })
+        .catch(err => res.status(500).json({error: err}))
+})
+
 //Forgotten password
 router.post('/forgotpassword', forgotPasswordValidator, async (req, res) => {
     const errors = validationResult(req);
@@ -311,7 +330,6 @@ router.post('/googlelogin', (req, res) => {
                                 }
                                 const token = jwt.sign({ _id: data._id }, process.env.JWT_SECRET, {expiresIn: "7d"});
                                 const { _id, email, username } = data;
-                                console.log(data)
                                 return res.json({
                                     token,
                                     user: {_id, email, username}

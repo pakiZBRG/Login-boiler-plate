@@ -38,21 +38,21 @@ export default function User({match, history}) {
             <ToastContainer/>
             <div className='background-white'>
                 {isAuth() ?
-                    (
-                        <div className='background-login'>
-                            <h2>Welcome, {username}</h2>
-                            <h2>You signed in with {email} email</h2>
-                            <button
-                                onClick={() => {
-                                    signout(() => {
-                                        toast.success('Signout successful');
-                                        history.push('/');
-                                    });
-                                }}
-                            >
-                                <i className='fa fa-sign-out' style={{marginRight: '0.4rem'}}/>Signout
-                            </button>
-                        </div>)    :
+                    <div className='background-login'>
+                        <h2>Welcome, <span style={{color: 'crimson'}}>{username}</span></h2>
+                        <h2>You signed in with <span style={{color: 'crimson'}}>{email}</span> email</h2>
+                        <button
+                            onClick={() => {
+                                signout(() => {
+                                    toast.success('Signout successful');
+                                    history.push('/');
+                                });
+                            }}
+                        >
+                            <i className='fa fa-sign-out' style={{marginRight: '0.4rem'}}/>Signout
+                        </button>
+                    </div>
+                        :
                     <div className='background-login'>
                         <h2>Access denied to unauthorized users</h2>
                         <Link to='/login'>
