@@ -10,16 +10,12 @@ export default function Home({match}) {
         email: ""
     });
 
-    //Abort Signal -> React warning appeared
-    const controller = new AbortController()
-    const signal = controller.signal
-
     useEffect(() => {
         let userId = localStorage.user;
         console.log(userId)
         if(localStorage.length){
             //Get logged user
-            axios.get(`/users/${userId.replace(/['"]+/g, '')}`, {signal})
+            axios.get(`/users/${userId.replace(/['"]+/g, '')}`)
                 .then(res => {
                     console.log(res);
                     setUserData({
