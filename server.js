@@ -6,13 +6,13 @@ const app = express();
 require('dotenv').config();
 
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true,useUnifiedTopology: true, useCreateIndex: true })
     .then(() => console.log("MongoDB connected..."))
     .catch(err => console.log(err));
 
 if(process.env.NODE_ENV === 'development'){
-    app.use(cors({ origin: process.env.CLIENT_URL }));
     app.use(morgan('dev'));
 }
 

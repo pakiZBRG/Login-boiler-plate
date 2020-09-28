@@ -49,7 +49,7 @@ router.post('/register', validRegister, async (req, res) => {
                 subject: "Account activation link",
                 html: `
                     <h3>Please Click on Link to Activate:</h3>
-                    <p>${process.env.CLIENT_URL}/users/activate/${token}</p>
+                    <p>${process.env.PUBLIC_URL}/users/activate/${token}</p>
                     <hr/>
                 `
             }
@@ -211,7 +211,7 @@ router.post('/forgotpassword', forgotPasswordValidator, async (req, res) => {
             subject: "Reset password link",
             html: `
                 <h3>Please Click on Link to Reset Password:</h3>
-                <p>${process.env.CLIENT_URL}/resetpassword/${token}</p>
+                <p>${process.env.PUBLIC_URL}/resetpassword/${token}</p>
                 <hr/>
             `
         }
@@ -310,6 +310,7 @@ router.post('/googlelogin', (req, res) => {
                         if(user){
                             const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "1d"})
                             const { _id, email, username } = user;
+                            console.log(`Google user: ${user}`)
                             return res.json({
                                 token,
                                 user: {_id, email, username}
@@ -330,6 +331,7 @@ router.post('/googlelogin', (req, res) => {
                                 }
                                 const token = jwt.sign({ _id: data._id }, process.env.JWT_SECRET, {expiresIn: "7d"});
                                 const { _id, email, username } = data;
+                                console.log(`Google data: ${data}`)
                                 return res.json({
                                     token,
                                     user: {_id, email, username}
@@ -354,12 +356,14 @@ router.post('/facebooklogin', (req, res) => {
             .then(response => response.json())
             .then(response => {
                 const {email, name} = response;
+                console.log(`Facebook response: ${response}`)
                 User.findOne({email})
                     .exec(async (err, user) => {
                         //if user with given email exists -> Same w/ Google
                         if(user){
                             const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {expiresIn: "1d"});
                             const { _id, email, name } = user;
+                            console.log(`Facebook user: ${user}`)
                             return res.json({
                                 token,
                                 user: {_id, email, name}
@@ -381,6 +385,7 @@ router.post('/facebooklogin', (req, res) => {
                                 }
                                 const token = jwt.sign({ _id: data._id }, process.env.JWT_SECRET, {expiresIn: "1d"});
                                 const { _id, email, name } = data;
+                                console.log(`Facebook data: ${data}`)
                                 return res.json({
                                     token,
                                     user: {_id, email, name}
@@ -390,7 +395,7 @@ router.post('/facebooklogin', (req, res) => {
                     })
             })
             .catch(err => {
-                res.json({ error: 'Facebook login Failed. Try later!' })
+                res.json({ error: err.message })
             })
     )
 })
