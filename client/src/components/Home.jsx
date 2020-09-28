@@ -16,10 +16,12 @@ export default function Home({match}) {
 
     useEffect(() => {
         let userId = localStorage.user;
+        console.log(userId)
         if(localStorage.length){
             //Get logged user
             axios.get(`/users/${userId.replace(/['"]+/g, '')}`, {signal})
                 .then(res => {
+                    console.log(res);
                     setUserData({
                         id: res.data._id,
                         username: res.data.username,
