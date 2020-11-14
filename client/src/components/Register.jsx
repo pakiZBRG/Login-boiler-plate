@@ -82,12 +82,6 @@ export default function Register() {
                     <Link to='/login' className='login-btn' style={{fontWeight: 'bold'}}>
                         <i className='fa fa-user' style={{marginRight: '0.5rem'}}></i>Login
                     </Link>
-                    <Link to='/google' className='login-btn google'>
-                        <i className='fa fa-google' style={{marginRight: '0.5rem'}}></i>Google
-                    </Link>
-                    <Link to='/facebook' className='login-btn facebook'>
-                        <i className='fa fa-facebook' style={{marginRight: '0.5rem'}}></i>Facebook
-                    </Link>
                 </div>
                 <img src={image} alt='register'/>
             </div>

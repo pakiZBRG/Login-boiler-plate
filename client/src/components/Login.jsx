@@ -41,7 +41,7 @@ export default function Login({history}) {
     }
 
     //Google Login
-    const sendGoogleToken = tokenId => {    
+    const sendGoogleToken = tokenId => {
         axios.post('users/googlelogin', {idToken: tokenId})
             .then(res => redirectUser(res))
             .catch(() => toast.error('Google login error'))
@@ -102,7 +102,7 @@ export default function Login({history}) {
                                 disabled={renderProps.disabled}
                                 className='login-btn google'
                             >
-                                <i className='fa fa-google' style={{marginRight: '0.5rem'}}></i>Google
+                                <i className='fa fa-google' style={{marginRight: '0.5rem'}}></i>Login with Google
                             </button>
                         )}
                     />
@@ -116,7 +116,7 @@ export default function Login({history}) {
                                 className='login-btn facebook'
                             >
                                 <i className='fa fa-facebook' style={{marginRight: '0.5rem'}}></i>
-                                Sign in with Facebook
+                                Login with Facebook
                             </button>
                         )}
                     />
