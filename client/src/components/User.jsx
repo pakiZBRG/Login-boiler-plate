@@ -29,7 +29,7 @@ export default function User({match, history}) {
                 })
                 .catch(err => toast.error(err.response.data.error));
         }
-    }, [match.params]);
+    }, [match.params, signal]);
 
     const {username, email} = userData;
 

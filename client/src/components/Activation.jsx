@@ -23,7 +23,7 @@ export default function Register({match}) {
                 token
             })
         }
-    }, [match.params]);
+    }, [match.params, userData]);
 
     const {username, token} = userData;
 
