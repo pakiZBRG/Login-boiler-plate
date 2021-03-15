@@ -3,33 +3,33 @@ import { isAuth, signout } from '../helpers/auth';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import cookie from 'js-cookie';
 
 
 export default function User({match, history}) {
     const [userData, setUserData] = useState({
         username: "",
-        email: ""
+            email: ""
     });
 
-    //Abort Signal -> React warning appeared
-    const controller = new AbortController()
-    const signal = controller.signal
+    const token = cookie.get('token');
+    const loggedUser = localStorage.getItem('user');
 
     useEffect(() => {
         let userId = localStorage.user;
-        if(localStorage.length){
-            axios.get(`/users/${userId.replace(/['"]+/g, '')}`, {signal})
+        if(token || loggedUser){
+            axios.get(`/users/${userId.replace(/['"]+/g, '')}`)
                 .then(res => {
+                    toast.success(`Welcome, ${res.data.username}`)
                     setUserData({
                         _id: res.data._id,
                         username: res.data.username,
                         email: res.data.email
                     })
-                    toast.success('Welcome!')
                 })
                 .catch(err => toast.error(err.response.data.error));
         }
-    }, [match.params, signal]);
+    }, [match.params]);
 
     const {username, email} = userData;
 
@@ -43,10 +43,7 @@ export default function User({match, history}) {
                         <h2>You signed in with <span style={{color: 'crimson'}}>{email}</span> email</h2>
                         <button
                             onClick={() => {
-                                signout(() => {
-                                    toast.success('Signout successful');
-                                    history.push('/');
-                                });
+                                signout(() => history.push('/'));
                             }}
                         >
                             <i className='fa fa-sign-out' style={{marginRight: '0.4rem'}}/>Signout

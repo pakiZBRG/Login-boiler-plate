@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 export default function ResetPassword({match}) {
     const [userData, setUserData] = useState({
         password: "",
-        confirmPassword: "",
+        passwordConfirm: "",
         token: ""
     });
 
@@ -18,7 +18,7 @@ export default function ResetPassword({match}) {
         if(token){
             setUserData({ ...userData, token });
         }
-    }, [match.params.token, userData])
+    }, [])
 
     const handleChange = text => e => setUserData({...userData, [text]: e.target.value});
 

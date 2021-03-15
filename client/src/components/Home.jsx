@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { isAuth } from '../helpers/auth';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export default function Home({match}) {
     const [userData, setUserData] = useState({
@@ -12,11 +12,10 @@ export default function Home({match}) {
 
     useEffect(() => {
         let userId = localStorage.user;
-        if(localStorage.length){
+        if(localStorage.length > 0){
             //Get logged user
             axios.get(`/users/${userId.replace(/['"]+/g, '')}`)
                 .then(res => {
-                    console.log(res);
                     setUserData({
                         id: res.data._id,
                         username: res.data.username,
@@ -31,7 +30,7 @@ export default function Home({match}) {
 
     return (
         <div className='background'>
-            
+            <ToastContainer/>
             <div className='background-white'>
                 {isAuth() ?
                     <div className='background-login'>

@@ -35,6 +35,7 @@ export default function Register() {
                     })
                     .catch(err => {
                         toast.error(err.response.data.error)
+                        console.log(err)
                     }) 
             } else {
                 toast.error('Passwords do not match');

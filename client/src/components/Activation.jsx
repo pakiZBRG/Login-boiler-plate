@@ -12,7 +12,7 @@ export default function Register({match}) {
         username: "",
         token: ""
     });
-
+    
     useEffect(() => {
         let token = match.params.token;
         let {username} = jwt.decode(token);
@@ -23,7 +23,7 @@ export default function Register({match}) {
                 token
             })
         }
-    }, [match.params, userData]);
+    }, []);
 
     const {username, token} = userData;
 

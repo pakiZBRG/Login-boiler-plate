@@ -15,7 +15,8 @@ exports.validLogin = [
     check('email').isEmail()
         .withMessage('Must be a valid email address'),
     check('password', "Password is requried").notEmpty(),
-    check('password').isLength({ min: 8 })
+    check('password')
+        .isLength({ min: 8 })
         .withMessage('Password must contain at least 8 characters')
         .matches(/\d/).withMessage('Password must contain a number')
 ]
@@ -34,4 +35,5 @@ exports.resetPasswordValidator = [
         .isEmpty()
         .isLength({ min: 8 })
         .withMessage('Password must be at least 8 characters long')
+        .matches(/\d/).withMessage('Password must contain a number')
 ]
