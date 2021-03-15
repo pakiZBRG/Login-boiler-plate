@@ -7,6 +7,7 @@ import cookie from 'js-cookie';
 
 
 export default function User({match, history}) {
+    const userId = localStorage.getItem("user") && localStorage.getItem("user").replace(/['"]+/g, '');
     const [userData, setUserData] = useState({
         username: "",
             email: ""
@@ -16,9 +17,8 @@ export default function User({match, history}) {
     const loggedUser = localStorage.getItem('user');
 
     useEffect(() => {
-        let userId = localStorage.user;
         if(token || loggedUser){
-            axios.get(`/users/${userId.replace(/['"]+/g, '')}`)
+            axios.get(`/users/${userId}`)
                 .then(res => {
                     toast.success(`Welcome, ${res.data.username}`)
                     setUserData({

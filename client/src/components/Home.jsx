@@ -5,16 +5,16 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 export default function Home({match}) {
+    const userId = localStorage.getItem("user") && localStorage.getItem("user").replace(/['"]+/g, '');
     const [userData, setUserData] = useState({
         username: "",
         email: ""
     });
 
     useEffect(() => {
-        let userId = localStorage.user;
         if(localStorage.length > 0){
             //Get logged user
-            axios.get(`/users/${userId.replace(/['"]+/g, '')}`)
+            axios.get(`/users/${userId}`)
                 .then(res => {
                     setUserData({
                         id: res.data._id,
